@@ -19,17 +19,20 @@ This is based off of the "Cluster Expansion" idea.
 
 Usage notes:
 -I compile with the following command:
-   gcc -o decomp -Ofast -std=c11 -w -lm Constants.c IO.c Lattice.c Memory.c Structs.c Main.c extern/kdtree-master/kdtree.c
+   "gcc -o decomp -Ofast -std=c11 -w -lm Constants.c IO.c Lattice.c Memory.c Structs.c Main.c extern/kdtree-master/kdtree.c"
 which names the executable 'decomp'.  
+
 -Assuming that you named your executable 'decomp', the command:
-   ./decomp -i input.ldc -r 3.15
--To avoid slowdowns associated with console output, especially for long runs, do this:
-   ./decomp -i input.ldc -r 3.15 >out.ldc
--this is especially important for remote connections (in which case you might also sandwich the above command
-inbetween 'nohup' and '&').
+   "./decomp -i input.ldc -r 3.15"
 will read input from the file input.ldc and OVERWRITE the radius within input.ldc with
 the value 3.5 (the -r option is not required.  If left out, the input.ldc radius will
 be used instead).
+
+-To avoid slowdowns associated with console output, especially for long runs, do this:
+   "./decomp -i input.ldc -r 3.15 >out.ldc"
+this is especially important for remote connections (in which case you might also sandwich the above command
+inbetween 'nohup' and '&').
+
 -The files Constants.* include some important things that you may want to change.  Specifically:
 --the "#define"s in Constants.h (see comments within actual file)
 --the "const external"s in Constants.c (see comments within actual file)  
