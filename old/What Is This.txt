@@ -1,0 +1,12 @@
+This is code from when I still thought that using the
+Kabsch algorithm was a good idea for comparing two chemical
+enviornments.  
+
+The reasons that I switched is because:
+(1) The Kabsch algorithm requires that vectors be 
+correlated BEFORE the start of the algo - this basically
+makes it useless for doing what I want.
+(2) It is a bit slower than what I'm now considering doing:
+100,000 comparisons takes about 5 seconds with 5 sweeps per
+comparison and about 4.2 atoms per enviornment.  Adding a 
+fix to (1) would surely add a good amount of time to this.     

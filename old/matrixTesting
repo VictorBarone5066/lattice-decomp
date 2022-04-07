@@ -1,0 +1,51 @@
+#define rows 25
+#define cols 52
+
+void pmat(const double** mat, int n, int m){
+	for(int i = 0; i < n; ++i){
+		for(int j = 0; j < m; ++j){
+			printf("%f\t", mat[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+	//********************
+	//Matrix Testing Stuff
+	//Paste in main()
+	//********************
+
+	printf("ORIGINAL:\n");
+	double** M; 
+	double cnt = 1.0;
+	M = malloc(rows*sizeof(double*)); 
+	for(int i = 0; i < rows; ++i){
+		M[i] = malloc(cols*sizeof(double));
+	}
+	for(int i = 0; i < rows; ++i){
+		for(int j = 0; j < cols; ++j){
+			M[i][j] = cnt;
+			cnt += 1.0;
+		}
+	}
+#if 0
+	M[0][0] = 3.0; M[0][1] = 2.0; M[0][2] = 2.0;
+	M[1][0] = 2.0; M[1][1] = 3.0; M[1][2] = -2.0;
+#endif
+#if 0
+	M[0][0] = 0.0; M[0][1] = 1.0;
+	M[1][0] = 1.0; M[1][1] = 0.0;
+	M[2][0] = 1.0; M[2][1] = 1.0;
+#endif
+	pmat(M, rows, cols);
+	
+	double** U; double** S; double** V;
+	SVD(&U, &S, &V, M, rows, cols, 5);
+	printf("U:\n"); pmat(U, rows, rows);
+	printf("S:\n"); pmat(S, rows, cols);
+	printf("V:\n"); pmat(V, cols, cols);
+
+
+
+	return 0;

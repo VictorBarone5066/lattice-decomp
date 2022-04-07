@@ -1,0 +1,42 @@
+
+//aNM where N = 1, 2, 3 and M = x, y, z.
+//The real-space lattice vectors (double prec floats)  
+BEGIN LATTICE
+a1x a1y a1z
+a2x a2y a2z
+a3x a3y a3z
+END LATTICE
+
+//element0 = Ag, element1 = C, element2 = S, ... etc (strings)
+BEGIN ELEMENTMAP
+numElemsPerConfig
+element0 
+element1 
+...
+elementN-1 //N = numElemsPerConfig
+END ELEMENTMAP
+
+//site map: DIRECT coordinates (double precision floats) 
+BEGIN SITEMAP
+numSitesPerConfig
+atom0A atom0B atom0C 
+atom1A atom1B atom1C 
+...
+atomM-1A atomM-1B atomM-1C //M = numSitesPerConfig
+END SITEMAP
+
+//cutoff radius, same units as lattice is input as (2x prec float)
+BEGIN CUTOFF
+rCut
+END CUTOFF
+
+//a config is a space-seperated list (call it C) such that
+//the m'th index of C being equal to n indicates that the 
+//m'th site is occupied by element n for this configuration
+BEGIN CONFIG
+numConfigs
+config0
+config1
+...
+configP-1 //P = numConfigs
+END CONFIG
