@@ -18,6 +18,7 @@ physical quantities of "many" possible configurations by fitting only "a few" da
 This is based off of the "Cluster Expansion" idea.
 
 Usage notes:
+
 -I compile with the following command:
    "gcc -o decomp -Ofast -std=c11 -w -lm Constants.c IO.c Lattice.c Memory.c Structs.c Main.c extern/kdtree-master/kdtree.c"
 which names the executable 'decomp'.  
