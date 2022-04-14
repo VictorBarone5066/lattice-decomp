@@ -3,6 +3,9 @@
 #define QUICK 1 ///skips many sorts at expense of more memory usage
 #define GIVE_DETAILS 1 ///Prints job info
 #define GIVE_ENVS 0 ///prints all unique chemical enviornments
+#define WRITE_SPARSE 1 ///prints matrix as rownum col0 val0 col1 val1
+					   ///where col*, val* are only written for
+					   ///nonzero val*
 
 typedef unsigned int uint;
 
