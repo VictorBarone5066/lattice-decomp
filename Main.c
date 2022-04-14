@@ -80,6 +80,7 @@ int main(int argc, char *argv[]){
 
 
 	//Setup done: Now loop through all configs-----------------------
+	unsigned long nConfigs;
 #if DEBUG
 	printf("finding unique envs ... \n");
 #endif
@@ -107,7 +108,7 @@ int main(int argc, char *argv[]){
 	fgets(line, LINESIZE, infile);
 	if(strstr(line, "BEGIN CONFIG")){
 	fgets(line, LINESIZE, infile);
-	unsigned long nConfigs = strtoul(line, &next, BASE);
+	nConfigs = strtoul(line, &next, BASE);
 	int* elemArr = malloc(nSites*sizeof(int));
 
 	for(unsigned long i = 0; i < nConfigs; ++i){
@@ -201,9 +202,16 @@ int main(int argc, char *argv[]){
 				
 		///Print this config's env vector
 		printf("%i", i);
-		//for(uint j = 0; j < uniqueCurSize; ++j){
-		//	printf(" %i", cellDecomp[j]);
-		//}
+		for(uint j = 0; j < uniqueCurSize; ++j){
+#if WRITE_SPARSE
+			if(cellDecomp[j] != 0){
+				printf(" %i %i", j, cellDecomp[j]);
+			}
+#endif
+#if (!WRITE_SPARSE)
+			printf(" %i", cellDecomp[j]);
+#endif
+		}
 		printf("\n");
 
 		///Make more room for enviornments if necessary
@@ -272,7 +280,7 @@ int main(int argc, char *argv[]){
 #if GIVE_DETAILS
 	clock_t clockStop = clock();
 	double runtime = (double)(clockStop - clockStart)/CLOCKS_PER_SEC;
-	PrintDetails(A, rCut, uniqueCurSize, nSites, nElems, runtime);
+	PrintDetails(A, rCut, nConfigs, uniqueCurSize, nSites, nElems, runtime);
 #endif
 	Free_nxm_d(&A, 3, 3);
 #if DEBUG

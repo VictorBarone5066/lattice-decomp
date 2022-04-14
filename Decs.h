@@ -7,6 +7,7 @@ void ReadInputFile(const char* fileName,
 	               unsigned int* nElems, char*** elems,
 	               unsigned int* nSites, struct site*** sites);
 void PrintDetails(const double** A, const double cutRad,
+                  const unsigned long nConfigs,
                   const uint nEnvs, const uint nSites,
                   const uint nElems,
                   const double runtime);

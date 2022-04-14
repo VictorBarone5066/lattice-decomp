@@ -108,6 +108,7 @@ void ReadInputFile(const char* fileName,
 
 //Gives job details at end of run
 void PrintDetails(const double **A, const double cutRad,
+				  const unsigned long nConfigs,
 				  const uint nEnvs, const uint nSites, 
 				  const uint nElems,
 				  const double runtime){
@@ -124,7 +125,14 @@ void PrintDetails(const double **A, const double cutRad,
 	printf("Cutoff radius: %010.5f\n", cutRad);
 
 	printf("\nTotal runtime: %.1f s\n", runtime);
-	printf("Number of (unique) envs: %i\n", nEnvs);
+	printf("Matrix Dimensions = (num configs) x (num unique envs): "
+		   "%i x %i\n", nConfigs, nEnvs);
+#if WRITE_SPARSE
+	printf("Matrix format: sparse (rcvcvcv...)\n");
+#endif
+#if (!WRITE_SPARSE)
+	printf("Matrix format: dense (rvvvvvv...)\n");
+#endif
 	printf("--------------------------------------------------"
 		   "---------------------\n");
 }
