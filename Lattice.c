@@ -106,10 +106,6 @@ void MoveToCell(struct site **site){
 }
 
 
-//TODO  There are massive memory leaks associated with using
-//Deepcopy_s() multiple times without freeing stuff first.  
-//I Don't feel like fixing it right now - do that if it becomes a 
-//problem later
 void SetSiteGeoms(struct env*** envs, const int nEnvs,
 				  const unsigned int nSites, 
                   const struct site** sites,
@@ -128,7 +124,6 @@ void SetSiteGeoms(struct env*** envs, const int nEnvs,
 	for(int b = -((int)nImgs[1]); b <= (int)nImgs[1]; ++b){
 	for(int c = -((int)nImgs[2]); c <= (int)nImgs[2]; ++c){
 		for(unsigned int i = 0; i < nSites; ++i){
-			//DeepCopy_s(&thisSite, sites[i]);
 			struct site* thisSite = malloc(sizeof(struct site)); 
 			for (unsigned int j = 0; j < 3; ++j) {
 				thisSite->crdsD[j] = sites[i]->crdsD[j];
@@ -190,7 +185,6 @@ void SetSiteGeoms(struct env*** envs, const int nEnvs,
 		for(int j = 0; j < resSize; ++j){
 			unsigned int thisInd = (unsigned int*)kd_res_item3(res, &x, &y, &z);
 			
-			//DeepCopy_s(&nbr, additionals[thisInd]);
 			struct site* nbr = malloc(sizeof(struct site));
 			nbr->elem = additionals[thisInd]->elem;
 			for(unsigned int k = 0; k < 3; ++k){
@@ -213,8 +207,6 @@ void SetSiteGeoms(struct env*** envs, const int nEnvs,
 
 
 	kd_free(kdNode);
-
-	//Free_nxm_s(&additionals, addSize, 1);
 	for(unsigned int i = 0; i < addSize; ++i){
 		free(additionals[i]);
 	}

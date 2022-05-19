@@ -130,19 +130,19 @@ int main(int argc, char *argv[]){
 			////comparison arrays to avoid re-making env[j]'s
 			////arrays every time we look at uniqueEnv[k]
 			////(for speed)
-			double* refArr; int* elemArr_;
+			double* refDstArr; int* refEleArr;
 			int refArrSize = (envs[j]->nSites)*
 								(envs[j]->nSites - 1)/2;
-			MakeDstArr_e(&refArr, refArrSize, envs[j]);
-			MakeElemArr_e(&elemArr_, envs[j], nElems);
+			MakeDstArr_e(&refDstArr, refArrSize, envs[j]);
+			MakeElemArr_e(&refEleArr, envs[j], nElems);
 
 			///Check all known unique envs to see if the current env
 			///exists there or not
 			unsigned short toAdd = 1;
 			for(unsigned long k = 0; k < uniqueCurSize; ++k){
 #if QUICK
-				if(QCmpr_e(nElems, elemArr_,
-					       uniqueEnvs[k]->sortedElems, refArr,
+				if(QCmpr_e(nElems, refEleArr,
+					       uniqueEnvs[k]->sortedElems, refDstArr,
 					       refArrSize, uniqueEnvs[k]->sortedDists,
 					       uniqueEnvs[k]->distsLen, CART_EPS)){
 					toAdd = 0;
@@ -187,7 +187,8 @@ int main(int argc, char *argv[]){
 				int* elmsarr;
 				MakeElemArr_e(&elmsarr, newEnv, nElems);
 				newEnv->sortedElems = elmsarr;
-				newEnv->distsLen = (newEnv->nSites)*(newEnv->nSites - 1)/2;
+				newEnv->distsLen = (newEnv->nSites)*
+									(newEnv->nSites - 1)/2;
 				double *darr;
 				MakeDstArr_e(&darr, newEnv->distsLen, newEnv);
 				newEnv->sortedDists = darr;
@@ -196,8 +197,8 @@ int main(int argc, char *argv[]){
 				uniqueCurSize++;
 			}
 
-			free(refArr);
-			free(elemArr_);
+			free(refDstArr);
+			free(refEleArr);
 		}
 				
 		///Print this config's env vector
