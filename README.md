@@ -5,7 +5,11 @@ Have a look at 'inputexample.ldc' for an example of how to build an input file.
 
 This program writes the matrix A in the equation Ax = b, where A_ij is the count of
 chemical environment number j that configuration i contains.  
-(A(1)(2) = 3 means that configuration 1 has three instances of chem env #2)
+A can be written in dense:
+A(1)(2) = 3 means that configuration 1 has three instances of chem env #2
+...or sparse:
+   row col val col val col val ... 
+formats.
 
 A chemical environment is a set of atoms within some radius defined by the distances 
 between them and the element of each one.  The decomposition of a set of configurations
